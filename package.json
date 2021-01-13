@@ -1,0 +1,24 @@
+{
+  "name": "@hexlet/code",
+  "version": "0.0.1",
+  "description": "project generator of differences",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexAMitrofanov/frontend-project-lvl2.git"
+  },
+  "keywords": [
+    "generator",
+    "differences"
+  ],
+  "author": "Alex Mitrofanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexAMitrofanov/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/AlexAMitrofanov/frontend-project-lvl2#readme"
+}
