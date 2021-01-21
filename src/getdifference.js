@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-const getDifference = (file1, file2) => {
-  // const fil1 = fs.readFileSinc(file1);
-
+const getDifference = (filejson1, filejson2) => {
+  const file1 = JSON.parse(filejson1);
+  const file2 = JSON.parse(filejson2);
   const keys1 = Object.keys(file1).sort();
   const keys2 = Object.keys(file2).sort();
   const keys = keys2.reduce((acc, key) => {
