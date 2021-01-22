@@ -1,9 +1,9 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/AlexAMitrofanov/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/AlexAMitrofanov/frontend-project-lvl2/actions)
 
-### code climate:
-
 <a href="https://codeclimate.com/github/AlexAMitrofanov/frontend-project-lvl2/maintainability"><img src="https://api.codeclimate.com/v1/badges/c86075a7254f5148e2d7/maintainability" /></a>
+
+[![Nodejs CI](https://github.com/AlexAMitrofanov/frontend-project-lvl2/workflows/Nodejs%20CI/badge.svg)](https://github.com/AlexAMitrofanov/frontend-project-lvl2/actions)
 
 ### video showing the the program gendiff.js in work:
 
