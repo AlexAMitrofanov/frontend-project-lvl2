@@ -14,4 +14,4 @@ test:
 	npx -n --experimental-vm-modules jest
 
 test-coverage:
-	npm test -- --coverage
+	npm test -s -- --coverage
