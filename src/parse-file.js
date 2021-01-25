@@ -8,7 +8,7 @@ const parseFile = (fileName) => {
   const path = require('path');
   const filePath = path.resolve(fileName);
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  const [, format] = fileName.split('.');
+  const format = path.extname(fileName);
   if (format === 'json') {
     file = JSON.parse(fileContent);
   }

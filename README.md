@@ -9,4 +9,6 @@
 
 ### video showing the the program gendiff.js in work:
 
-[![gendiff](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8.svg)](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8)
+[![gendiffJSONfiles](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8.svg)](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8)
+
+[![gendiffYMLfiles](https://asciinema.org/a/KI2nnEc0tTAR16LnPxA0ZL9oA.svg)](https://asciinema.org/a/KI2nnEc0tTAR16LnPxA0ZL9oA)
