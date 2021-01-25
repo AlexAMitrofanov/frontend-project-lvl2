@@ -1,16 +1,9 @@
 import _ from 'lodash';
-import { createRequire } from 'module';
+import parseFile from './parse-file.js';
 
-const getDifference = (filepath1, filepath2) => {
-  const require = createRequire(import.meta.url);
-  const fs = require('fs');
-  const path = require('path');
-  const path1 = path.resolve(filepath1);
-  const path2 = path.resolve(filepath2);
-  const fileContent1 = fs.readFileSync(path1, 'utf8');
-  const fileContent2 = fs.readFileSync(path2, 'utf8');
-  const file1 = JSON.parse(fileContent1);
-  const file2 = JSON.parse(fileContent2);
+const getDifference = (filePath1, filePath2) => {
+  const file1 = parseFile(filePath1);
+  const file2 = parseFile(filePath2);
   const keys1 = Object.keys(file1).sort();
   const keys2 = Object.keys(file2).sort();
   const keys = keys2.reduce((acc, key) => {
