@@ -1,23 +1,19 @@
 import { test, expect } from '@jest/globals';
 import { createRequire } from 'module';
 import getDifference from '../src/getdifference.js';
+import expectedValueFlat from '../__fixtures__/flatFileResult.js';
+import expectedValueTree from '../__fixtures__/treeFileResult.js';
 
-const require = createRequire(import.meta.url, '..');
-const filepath1 = require.resolve('../__fixtures__/flatEqual1.json');
-const filepath2 = require.resolve('../__fixtures__/flatEqual2.json');
-const filepath3 = require.resolve('../__fixtures__/file1.yml');
-const filepath4 = require.resolve('../__fixtures__/file2.yml');
+const require = createRequire(import.meta.url);
+const dir = '../__fixtures__/';
+const filePath = (fileName) => require.resolve(`${dir}`.concat(`${fileName}`));
 
-const expectedValue = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`;
+test('getDifference for flat files', () => {
+  expect(getDifference(filePath('flatEqual1.json'), filePath('flatEqual2.json'))).toEqual(expectedValueFlat);
+  expect(getDifference(filePath('file1.yml'), filePath('file2.yml'))).toEqual(expectedValueFlat);
+});
 
-test('getDifference', () => {
-  expect(getDifference(filepath1, filepath2)).toEqual(expectedValue);
-  expect(getDifference(filepath3, filepath4)).toEqual(expectedValue);
+test('getDifference for brunched structure', () => {
+  expect(getDifference(filePath('fileTree1.json'), filePath('fileTree2.json'))).toEqual(expectedValueTree);
+  expect(getDifference(filePath('fileTree1.yml'), filePath('fileTree2.yml'))).toEqual(expectedValueTree);
 });
