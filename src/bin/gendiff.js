@@ -3,7 +3,7 @@
 import commander from 'commander';
 
 import { createRequire } from 'module';
-import getDiffTree from '../getDifTree.js';
+import stylish from '../stylish.js';
 
 const require = createRequire(import.meta.url);
 const packageConfig = require('../../package.json');
@@ -16,7 +16,7 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<filepath1> </filepath2>')
   .action((filepath1, filepath2) => {
-    console.log(getDiffTree(filepath1, filepath2));
+    console.log(stylish(filepath1, filepath2));
   });
 
 program.parse(process.argv);

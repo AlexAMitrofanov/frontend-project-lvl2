@@ -16,16 +16,21 @@ const getDiffTree = (filePath1, filePath2) => {
     const resultObject = keys.reduce((acc, key) => {
       if (_.has(file1, key) && _.has(file2, key)) {
         if (file2[key] === file1[key]) {
-          acc[`  ${key}`] = file2[key];
+          acc[`${key}`] = file2[key];
           return acc;
         }
-        if ((file2[key] !== file1[key]) && ((typeof file1[key] !== 'object') && (typeof file2[key] !== 'object'))) {
+        if ((file2[key] !== file1[key]) && ((typeof file1[key] !== 'object' || file1[key] === null) && (typeof file2[key] !== 'object' || file2[key] === null))) {
+          acc[`- ${key}`] = file1[key];
+          acc[`+ ${key}`] = file2[key];
+          return acc;
+        }
+        if ((typeof file1[key] === 'object') && (typeof file2[key] !== 'object' || file2[key] === null)) {
           acc[`- ${key}`] = file1[key];
           acc[`+ ${key}`] = file2[key];
           return acc;
         }
         if ((typeof file1[key] === 'object') && (typeof file2[key] === 'object')) {
-          acc[`  ${key}`] = iter(file1[key], file2[key]);
+          acc[`${key}`] = iter(file1[key], file2[key]);
           return acc;
         }
       }
