@@ -1,7 +1,4 @@
-import getDiffTree from './getDifTree.js';
-
-const makeRequiredView = (file1, file2) => {
-  const fileForFormat = getDiffTree(file1, file2);
+const stylish = (file) => {
   const iter = (tree, indent) => {
     const newIndent = '    ';
     const keys = Object.keys(tree);
@@ -26,7 +23,7 @@ const makeRequiredView = (file1, file2) => {
     }, '');
     return result;
   };
-  return `{${iter(fileForFormat, '')}\n}`;
+  return `{${iter(file, '')}\n}`;
 };
 
-export default makeRequiredView;
+export default stylish;
