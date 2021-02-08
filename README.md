@@ -14,4 +14,6 @@
 [![gendiffYMLfiles](https://asciinema.org/a/KI2nnEc0tTAR16LnPxA0ZL9oA.svg)](https://asciinema.org/a/KI2nnEc0tTAR16LnPxA0ZL9oA)
 
 
-[![gendiffTreefiles](https://asciinema.org/a/biVmBZzfY2KcTFVv2LaFP1JLE.svg)](https://asciinema.org/a/biVmBZzfY2KcTFVv2LaFP1JLE)
+[![gendiffTreefilesStylish](https://asciinema.org/a/biVmBZzfY2KcTFVv2LaFP1JLE.svg)](https://asciinema.org/a/biVmBZzfY2KcTFVv2LaFP1JLE)
+
+[![gendiffTreefilesPlain](https://asciinema.org/a/SSYt9x8dkYRZ68KJVHDQ3YSCm.svg)](https://asciinema.org/a/SSYt9x8dkYRZ68KJVHDQ3YSCm)
