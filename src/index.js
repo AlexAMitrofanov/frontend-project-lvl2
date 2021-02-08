@@ -1,4 +1,4 @@
-import applyFormatter from './formatters/apply-formatter.js';
+import applyFormatter from './formatters/index.js';
 import getDiffTree from './getDifTree.js';
 
 const getDiff = (filePath1, filePath2, format = 'stylish') => {
