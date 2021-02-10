@@ -1,6 +1,6 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
-import json from './format-json-style.js';
+import json from './format-json.js';
 
 const applyFormatter = (file, formatterName) => {
   const formatters = {};
