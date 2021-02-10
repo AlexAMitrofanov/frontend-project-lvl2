@@ -5,14 +5,7 @@ const getDiffTree = (filePath1, filePath2) => {
   const parsedFile1 = parseFile(filePath1);
   const parsedFile2 = parseFile(filePath2);
   const iter = (file1, file2) => {
-    const keys1 = Object.keys(file1).sort();
-    const keys2 = Object.keys(file2).sort();
-    const keys = keys2.reduce((acc, key) => {
-      if (!acc.includes(key)) {
-        acc.push(key);
-      }
-      return acc;
-    }, keys1).sort();
+    const keys = _.union(_.keys(file1), _.keys(file2)).sort();
     const resultObject = keys.reduce((acc, key) => {
       if (_.has(file1, key) && _.has(file2, key)) {
         if (file2[key] === file1[key]) {
@@ -35,7 +28,6 @@ const getDiffTree = (filePath1, filePath2) => {
     }, {});
     return resultObject;
   };
-  // console.log(iter(parsedFile1, parsedFile2));
   return iter(parsedFile1, parsedFile2);
 };
 export default getDiffTree;

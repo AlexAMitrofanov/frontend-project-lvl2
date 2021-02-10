@@ -10,11 +10,13 @@ const expValue = (fileName) => fs.readFileSync(filePath(fileName), 'utf-8');
 
 test('getDifference for brunched structure', () => {
   expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.json'))).toEqual(expValue('result-stylish.txt'));
+  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.yml'))).toEqual(expValue('result-stylish.txt'));
   expect(getDiff(filePath('fileTree1.yml'), filePath('fileTree2.yml'))).toEqual(expValue('result-stylish.txt'));
 });
 
 test('getDifference for brunched structure with plain formatter', () => {
   expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.json'), 'plain')).toEqual(expValue('result-plain.txt'));
+  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.yml'), 'plain')).toEqual(expValue('result-plain.txt'));
   expect(getDiff(filePath('fileTree1.yml'), filePath('fileTree2.yml'), 'plain')).toEqual(expValue('result-plain.txt'));
 });
 

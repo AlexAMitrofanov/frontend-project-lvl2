@@ -1,5 +1,3 @@
-const makeJsonFormat = (file) => {
-  // console.log(file);
-};
+const makeJsonFormat = (file) => JSON.stringify(file);
 
 export default makeJsonFormat;
