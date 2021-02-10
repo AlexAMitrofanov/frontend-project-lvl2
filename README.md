@@ -17,3 +17,5 @@
 [![gendiffTreefilesStylish](https://asciinema.org/a/biVmBZzfY2KcTFVv2LaFP1JLE.svg)](https://asciinema.org/a/biVmBZzfY2KcTFVv2LaFP1JLE)
 
 [![gendiffTreefilesPlain](https://asciinema.org/a/SSYt9x8dkYRZ68KJVHDQ3YSCm.svg)](https://asciinema.org/a/SSYt9x8dkYRZ68KJVHDQ3YSCm)
+
+[![gendiffTreefilesJSON](https://asciinema.org/a/88phWm94eD2FCwq6i0gIJ2Njm.svg)](https://asciinema.org/a/88phWm94eD2FCwq6i0gIJ2Njm)
