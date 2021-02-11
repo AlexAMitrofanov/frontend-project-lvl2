@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "0.0.1",
   "description": "project generator of differences",
-  "main": "src/getdifference.js",
+  "main": "src/index.js",
   "bin": {
     "gendiff": "./src/bin/gendiff.js"
   },
