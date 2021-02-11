@@ -22,5 +22,6 @@ test('getDifference for brunched structure with plain formatter', () => {
 
 test('getDifference for brunched structure with JSON style formatter', () => {
   expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.json'), 'json')).toEqual(expValue('result-json.txt'));
+  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.yml'), 'json')).toEqual(expValue('result-json.txt'));
   expect(getDiff(filePath('fileTree1.yml'), filePath('fileTree2.yml'), 'json')).toEqual(expValue('result-json.txt'));
 });
