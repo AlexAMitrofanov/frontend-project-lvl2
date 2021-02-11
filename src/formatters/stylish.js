@@ -36,7 +36,7 @@ const stylish = (file) => {
         }
         if (value2 === Object(value2)) {
           acc1 = acc.concat(`\n${newIndent.slice(2)}${indent}- ${key.slice(2)}: ${value1}`)
-            .concat(`\n${newIndent.slice(2)}${indent}+ ${key.slice(2)}: {${iter(value1, `${indent}${newIndent}`)}\n${indent}${newIndent}}`);
+            .concat(`\n${newIndent.slice(2)}${indent}+ ${key.slice(2)}: {${iter(value2, `${indent}${newIndent}`)}\n${indent}${newIndent}}`);
           return acc1;
         }
 
