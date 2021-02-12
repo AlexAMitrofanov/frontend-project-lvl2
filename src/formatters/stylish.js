@@ -1,55 +1,51 @@
 const stylish = (file) => {
   const iter = (tree, indent) => {
     const newIndent = '    ';
+    const indBig = `${newIndent.slice(2)}${indent}`;
+    const indSmall = `${indent}${newIndent}`;
     const keys = Object.keys(tree);
     const result = keys.reduce((acc, key) => {
-      let acc1;
       const signs = ['+', '-', '8'];
       const hasSign = signs.filter((sign) => key.includes(sign))[0];
-      let value1;
-      let value2;
-      if (Array.isArray(tree[key])) {
-        [value1, value2] = tree[key];
-      }
       if (!hasSign) {
         if (tree[key] !== Object(tree[key])) {
-          acc1 = key[0] === ' ' ? acc.concat(`\n${newIndent.slice(2)}${indent}${key}: ${tree[key]}`) : acc.concat(`\n${newIndent}${indent}${key}: ${tree[key]}`);
-          return acc1;
+          const a = key[0] === ' ' ? `\n${indBig}${key}: ${tree[key]}` : `\n${indSmall}${key}: ${tree[key]}`;
+          return acc.concat(a);
         }
-        acc1 = key[0] === ' ' ? acc.concat(`\n${newIndent.slice(2)}${indent}${key}: {${iter(tree[key], `${indent}${newIndent}`)}\n${indent}${newIndent}}`)
-          : acc.concat(`\n${newIndent}${indent}${key}: {${iter(tree[key], `${indent}${newIndent}`)}\n${indent}${newIndent}}`);
-        return acc1;
+        const b = key[0] === ' ' ? `\n${indBig}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`
+          : `\n${indSmall}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`;
+        return acc.concat(b);
       }
       if (hasSign) {
         if (hasSign !== '8') {
           if (tree[key] !== Object(tree[key])) {
-            acc1 = acc.concat(`\n${newIndent.slice(2)}${indent}${key}: ${tree[key]}`);
-            return acc1;
+            return acc.concat(`\n${indBig}${key}: ${tree[key]}`);
           }
-          acc1 = acc.concat(`\n${newIndent.slice(2)}${indent}${key}: {${iter(tree[key], `${indent}${newIndent}`)}\n${indent}${newIndent}}`);
-          return acc1;
-        }
-        if (value1 === Object(value1)) {
-          acc1 = acc.concat(`\n${newIndent.slice(2)}${indent}- ${key.slice(2)}: {${iter(value1, `${indent}${newIndent}`)}\n${indent}${newIndent}}`)
-            .concat(`\n${newIndent.slice(2)}${indent}+ ${key.slice(2)}: ${value2}`);
-          return acc1;
-        }
-        if (value2 === Object(value2)) {
-          acc1 = acc.concat(`\n${newIndent.slice(2)}${indent}- ${key.slice(2)}: ${value1}`)
-            .concat(`\n${newIndent.slice(2)}${indent}+ ${key.slice(2)}: {${iter(value2, `${indent}${newIndent}`)}\n${indent}${newIndent}}`);
-          return acc1;
+          return acc.concat(`\n${indBig}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`);
         }
 
-        acc1 = acc.concat(`\n${newIndent.slice(2)}${indent}- ${key.slice(2)}: ${value1}`)
-          .concat(`\n${newIndent.slice(2)}${indent}+ ${key.slice(2)}: ${value2}`);
-        return acc1;
+        const [value1, value2] = tree[key];
+        if (value1 === Object(value1)) {
+          const c = `\n${indBig}- ${key.slice(2)}: {${iter(value1, `${indSmall}`)}\n${indSmall}}\n${indBig}+ ${key.slice(2)}: ${value2}`;
+          return acc.concat(c);
+        }
+        if (value2 === Object(value2)) {
+          const d = `\n${indBig}- ${key.slice(2)}: ${value1}\n${indBig}+ ${key.slice(2)}: {${iter(value2, `${indSmall}`)}\n${indSmall}}`;
+          return acc.concat(d);
+        }
+        const e = `\n${indBig}- ${key.slice(2)}: ${value1}\n${indBig}+ ${key.slice(2)}: ${value2}`;
+        return acc.concat(e);
       }
-      return acc1;
-    }, '');
+      return acc;
+    }, []);
     return result;
   };
-  // console.log(`{${iter(file, '')}\n}`);
-  return `{${iter(file, '')}\n}`;
+  const res = iter(file, '');
+  return `{${res.flatMap((el) => el)
+    .join('')
+    .split('')
+    .filter((el) => el !== ',')
+    .join('')}\n}`;
 };
 
 export default stylish;
