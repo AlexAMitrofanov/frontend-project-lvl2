@@ -9,22 +9,18 @@ const getDiffTree = (filePath1, filePath2) => {
     const resultObject = keys.reduce((acc, key) => {
       if (_.has(file1, key) && _.has(file2, key)) {
         if (file2[key] === file1[key]) {
-          acc[`  ${key}`] = file2[key];
-          return acc;
+          Object.assign(acc, { [`  ${key}`]: file2[key] });
+          return Object.assign(acc, { [`  ${key}`]: file2[key] });
         }
         if ((typeof file1[key] === 'object') && (typeof file2[key] === 'object')) {
-          acc[`  ${key}`] = iter(file1[key], file2[key]);
-          return acc;
+          return Object.assign(acc, { [`  ${key}`]: iter(file1[key], file2[key]) });
         }
-        acc[`8 ${key}`] = [file1[key], file2[key]];
-        return acc;
+        return Object.assign(acc, { [`8 ${key}`]: [file1[key], file2[key]] });
       }
       if (!_.has(file1, key) && _.has(file2, key)) {
-        acc[`+ ${key}`] = file2[key];
-        return acc;
+        return Object.assign(acc, { [`+ ${key}`]: file2[key] });
       }
-      acc[`- ${key}`] = file1[key];
-      return acc;
+      return Object.assign(acc, { [`- ${key}`]: file1[key] });
     }, {});
     return resultObject;
   };

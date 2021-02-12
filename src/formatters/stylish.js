@@ -9,12 +9,10 @@ const stylish = (file) => {
       const hasSign = signs.filter((sign) => key.includes(sign))[0];
       if (!hasSign) {
         if (tree[key] !== Object(tree[key])) {
-          const a = key[0] === ' ' ? `\n${indBig}${key}: ${tree[key]}` : `\n${indSmall}${key}: ${tree[key]}`;
-          return acc.concat(a);
+          return key[0] === ' ' ? acc.concat(`\n${indBig}${key}: ${tree[key]}`) : acc.concat(`\n${indSmall}${key}: ${tree[key]}`);
         }
-        const b = key[0] === ' ' ? `\n${indBig}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`
-          : `\n${indSmall}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`;
-        return acc.concat(b);
+        return key[0] === ' ' ? acc.concat(`\n${indBig}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`)
+          : acc.concat(`\n${indSmall}${key}: {${iter(tree[key], `${indSmall}`)}\n${indSmall}}`);
       }
       if (hasSign) {
         if (hasSign !== '8') {
@@ -26,15 +24,12 @@ const stylish = (file) => {
 
         const [value1, value2] = tree[key];
         if (value1 === Object(value1)) {
-          const c = `\n${indBig}- ${key.slice(2)}: {${iter(value1, `${indSmall}`)}\n${indSmall}}\n${indBig}+ ${key.slice(2)}: ${value2}`;
-          return acc.concat(c);
+          return acc.concat(`\n${indBig}- ${key.slice(2)}: {${iter(value1, `${indSmall}`)}\n${indSmall}}\n${indBig}+ ${key.slice(2)}: ${value2}`);
         }
         if (value2 === Object(value2)) {
-          const d = `\n${indBig}- ${key.slice(2)}: ${value1}\n${indBig}+ ${key.slice(2)}: {${iter(value2, `${indSmall}`)}\n${indSmall}}`;
-          return acc.concat(d);
+          return acc.concat(`\n${indBig}- ${key.slice(2)}: ${value1}\n${indBig}+ ${key.slice(2)}: {${iter(value2, `${indSmall}`)}\n${indSmall}}`);
         }
-        const e = `\n${indBig}- ${key.slice(2)}: ${value1}\n${indBig}+ ${key.slice(2)}: ${value2}`;
-        return acc.concat(e);
+        return acc.concat(`\n${indBig}- ${key.slice(2)}: ${value1}\n${indBig}+ ${key.slice(2)}: ${value2}`);
       }
       return acc;
     }, []);
