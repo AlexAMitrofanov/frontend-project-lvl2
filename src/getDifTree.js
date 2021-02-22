@@ -6,25 +6,26 @@ const getDiffTree = (filePath1, filePath2) => {
   const parsedFile2 = parseFile(filePath2);
   const iter = (file1, file2) => {
     const keys = _.sortBy(_.union(_.keys(file1), _.keys(file2)));
-    const resultObject = keys.reduce((acc, key) => {
-      const acc1 = _.cloneDeep(acc);
+    const result = keys.reduce((acc, key) => {
       if (_.has(file1, key) && _.has(file2, key)) {
         if (file2[key] === file1[key]) {
-          Object.assign(acc, { [`  ${key}`]: file2[key] });
-          return Object.assign(acc1, { [`  ${key}`]: file2[key] });
+          return acc.concat({ key, status: 'unchanged', value: file2[key] });
         }
         if ((typeof file1[key] === 'object') && (typeof file2[key] === 'object')) {
-          return Object.assign(acc1, { [`  ${key}`]: iter(file1[key], file2[key]) });
+          return acc.concat({ key, status: 'unchanged', value: iter(file1[key], file2[key]) });
         }
-        return Object.assign(acc1, { [`8 ${key}`]: [file1[key], file2[key]] });
+        return acc.concat({
+          key, status: 'changed', value1: file1[key], value2: file2[key],
+        });
       }
-      if (!_.has(file1, key) && _.has(file2, key)) {
-        return Object.assign(acc1, { [`+ ${key}`]: file2[key] });
+      if (!_.has(file1, key)) {
+        return acc.concat({ key, status: 'added', value: file2[key] });
       }
-      return Object.assign(acc1, { [`- ${key}`]: file1[key] });
-    }, {});
-    return resultObject;
+      return acc.concat({ key, status: 'removed', value: file1[key] });
+    }, []);
+    return result;
   };
+  // console.log(iter(parsedFile1, parsedFile2));
   return iter(parsedFile1, parsedFile2);
 };
 export default getDiffTree;

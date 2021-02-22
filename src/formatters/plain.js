@@ -1,57 +1,31 @@
 const makePlainView = (tree) => {
   const iter = (file, dir1) => {
-    const keys = Object.keys(file);
-    const result = keys.reduce((acc, key) => {
-      const dir = dir1 === '' ? `${key.slice(2)}` : `${dir1}.${key.slice(2)}`;
-      const signs = ['+', '-', '8'];
-      const hasSign = signs.filter((sign) => key.includes(sign))[0];
-      let acc1;
-      const value = (typeof file[key] === 'string') ? `'${file[key]}'` : file[key];
-      let value1;
-      let value2;
-      if (Array.isArray(file[key])) {
-        [value1, value2] = file[key];
-        value1 = (typeof value1 === 'string') ? `'${value1}'` : value1;
-        value2 = (typeof value2 === 'string') ? `'${value2}'` : value2;
-        if (value1 === Object(value1)) {
-          value1 = '[complex value]';
-        }
-        if (value2 === Object(value2)) {
-          value2 = '[complex value]';
-        }
+    const result = file.reduce((acc, elem) => {
+      const dir = `${dir1}.${elem.key}`;
+      const value = (typeof elem.value === 'string') ? `'${elem.value}'` : elem.value;
+      if (elem.status === 'added') {
+        return value !== Object(value) ? `${acc}${dir}' was added with value: ${value}\n`
+          : `${acc}${dir}' was added with value: [complex value]\n`;
       }
-
-      if (!hasSign) {
-        if (value !== Object(value)) {
-          acc1 = `${acc}`;
-          return acc1;
-        }
-        if (value === Object(value)) {
-          acc1 = `${acc}${iter(value, dir)}`;
-          return acc1;
-        }
+      if (elem.status === 'removed') {
+        return `${acc}${dir}' was removed\n`;
       }
-
-      if (hasSign) {
-        if (hasSign === '-') {
-          acc1 = `${acc}${dir}' was removed\n`;
+      if (elem.status === 'changed') {
+        const value1 = (typeof elem.value1 === 'string') ? `'${elem.value1}'` : elem.value1;
+        const value2 = (typeof elem.value2 === 'string') ? `'${elem.value2}'` : elem.value2;
+        if (value1 !== Object(value1) && value2 !== Object(value2)) {
+          return `${acc}${dir}' was updated. From ${value1} to ${value2}\n`;
         }
-        if (hasSign === '+') {
-          acc1 = value !== Object(value) ? `${acc}${dir}' was added with value: ${value}\n`
-            : `${acc}${dir}' was added with value: [complex value]\n`;
-        }
-        if (hasSign === '8') {
-          acc1 = `${acc}${dir}' was updated. From ${value1} to ${value2}\n`;
-        }
+        return (value1 === Object(value1)) ? `${acc}${dir}' was updated. From [complex value] to ${value2}\n`
+          : `${acc}${dir}' was updated. From ${value1} to [complex value]\n`;
       }
-
-      return acc1;
+      return (value === Object(value)) ? `${acc}${iter(value, dir)}` : `${acc}`;
     }, '');
     return result;
   };
   return iter(tree, '')
     .split('\n').filter((el) => el)
-    .map((el) => `Property '${el}`)
+    .map((el) => `Property '${el.slice(1)}`)
     .join('\n');
 };
 
