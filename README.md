@@ -7,6 +7,8 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c86075a7254f5148e2d7/test_coverage)](https://codeclimate.com/github/AlexAMitrofanov/frontend-project-lvl2/test_coverage)
 
+### CLI application for comparing files in formats json, yaml.
+
 ### videos showing the the program gendiff.js in work:
 
 [![gendiffJSONfiles](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8.svg)](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8)
