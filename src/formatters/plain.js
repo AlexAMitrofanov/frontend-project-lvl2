@@ -9,28 +9,26 @@ const getNewValue = (value) => {
 
 const iter = (file, dir1) => {
   const result = file.reduce((acc, elem) => {
-    const dirName = elem.key;
-    const dir = `${dir1}.${dirName}`;
-    const value = getNewValue(elem.value);
-    if (elem.status === 'added') {
-      return `${acc}${dir}' was added with value: ${value}\n`;
+    const { key, status, value } = elem;
+    const dir = `${dir1}.${key}`;
+    switch (status) {
+      case 'added':
+        return `${acc}${dir}' was added with value: ${getNewValue(value)}*`;
+      case 'removed':
+        return `${acc}${dir}' was removed*`;
+      case 'changed':
+        return `${acc}${dir}' was updated. From ${getNewValue(elem.valueOld)} to ${getNewValue(elem.valueNew)}*`;
+      case 'unchanged':
+        return (_.isObject(value)) ? `${acc}${iter(value, dir)}` : `${acc}`;
+      default:
+        throw new Error(`${status} is unknown!`);
     }
-    if (elem.status === 'removed') {
-      return `${acc}${dir}' was removed\n`;
-    }
-    if (elem.status === 'changed') {
-      const valueOld = getNewValue(elem.valueOld);
-      const valueNew = getNewValue(elem.valueNew);
-      return `${acc}${dir}' was updated. From ${valueOld} to ${valueNew}\n`;
-    }
-    const valueUnchanged = elem.value;
-    return (_.isObject(valueUnchanged)) ? `${acc}${iter(valueUnchanged, dir)}` : `${acc}`;
   }, '');
   return result;
 };
 
 const makePlainView = (tree) => iter(tree, '')
-  .split('\n').filter((el) => el)
+  .split('*').filter((el) => el)
   .map((el) => `Property '${el.slice(1)}`)
   .join('\n');
 
