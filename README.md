@@ -9,7 +9,7 @@
 
 ### CLI application for comparing files in formats json, yaml.
 
-### videos showing the the program gendiff.js in work:
+### examples showing the the program gendiff in work in different cases:
 
 [![gendiffJSONfiles](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8.svg)](https://asciinema.org/a/suTa8aL9fGrhm6Qzm7fLVPTm8)
 
