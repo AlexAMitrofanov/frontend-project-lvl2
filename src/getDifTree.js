@@ -13,10 +13,7 @@ const iter = (file1, file2) => {
     if (_.isObject(file1[key]) && _.isObject(file2[key])) {
       return { key, status: 'unchanged', value: iter(file1[key], file2[key]) };
     }
-    if (file2[key] === file1[key]) {
-      return { key, status: 'unchanged', value: file2[key] };
-    }
-    return {
+    return (file2[key] === file1[key]) ? { key, status: 'unchanged', value: file2[key] } : {
       key, status: 'changed', valueOld: file1[key], valueNew: file2[key],
     };
   });
