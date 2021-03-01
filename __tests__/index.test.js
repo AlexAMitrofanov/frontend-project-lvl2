@@ -8,20 +8,21 @@ const dir = '../__fixtures__/';
 const filePath = (fileName) => require.resolve(`${dir}`.concat(`${fileName}`));
 const expValue = (fileName) => fs.readFileSync(filePath(fileName), 'utf-8');
 
-test('getDifference for brunched structure', () => {
-  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.json'))).toEqual(expValue('result-stylish.txt'));
-  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.yml'))).toEqual(expValue('result-stylish.txt'));
-  expect(getDiff(filePath('fileTree1.yml'), filePath('fileTree2.yml'))).toEqual(expValue('result-stylish.txt'));
+const allCases = [
+  [filePath('fileTree1.json'), filePath('fileTree2.json')],
+  [filePath('fileTree1.json'), filePath('fileTree2.yml')],
+  [filePath('fileTree1.yml'), filePath('fileTree2.yml')],
+];
+
+test.each(allCases)('getDifference for brunched structure default formatter and stylish formatter', (firstFile, secondFile) => {
+  expect(getDiff(firstFile, secondFile)).toEqual(expValue('result-stylish.txt'));
+  expect(getDiff(firstFile, secondFile, 'stylish')).toEqual(expValue('result-stylish.txt'));
 });
 
-test('getDifference for brunched structure with plain formatter', () => {
-  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.json'), 'plain')).toEqual(expValue('result-plain.txt'));
-  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.yml'), 'plain')).toEqual(expValue('result-plain.txt'));
-  expect(getDiff(filePath('fileTree1.yml'), filePath('fileTree2.yml'), 'plain')).toEqual(expValue('result-plain.txt'));
+test.each(allCases)('getDifference for brunched structure with plain formatter', (firstFile, secondFile) => {
+  expect(getDiff(firstFile, secondFile, 'plain')).toEqual(expValue('result-plain.txt'));
 });
 
-test('getDifference for brunched structure with JSON style formatter', () => {
-  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.json'), 'json')).toEqual(expValue('result-json.txt'));
-  expect(getDiff(filePath('fileTree1.json'), filePath('fileTree2.yml'), 'json')).toEqual(expValue('result-json.txt'));
-  expect(getDiff(filePath('fileTree1.yml'), filePath('fileTree2.yml'), 'json')).toEqual(expValue('result-json.txt'));
+test.each(allCases)('getDifference for brunched structure with JSON style formatter', (firstFile, secondFile) => {
+  expect(getDiff(firstFile, secondFile, 'json')).toEqual(expValue('result-json.txt'));
 });
