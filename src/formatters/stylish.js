@@ -32,11 +32,9 @@ const iter = (tree, indent) => {
 };
 
 const stylish = (file) => {
-  const res = iter(file, '');
-  return `{${res.flatMap((el) => el)
-    .join('')
-    .split('')
-    .filter((el) => el !== ',')
+  const result = iter(file, '');
+  return `{${result.join('')
+    .split(',')
     .join('')}\n}`;
 };
 
